@@ -22,7 +22,7 @@ package com.alianza.qa.peers.media.rtp;
 
 import org.junit.jupiter.api.Test;
 
-public class RtpParserTestNG {
+public class RtpParserTest {
 
     @Test
     public void testDecode() {

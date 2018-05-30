@@ -88,7 +88,6 @@ public class SdpParser {
 
         //session connection and attributes
         Hashtable<String, String> sessionAttributes = new Hashtable<String, String>();
-        sessionDescription.setAttributes(sessionAttributes);
 
         while ((line = reader.readLine()) != null
                 && line.charAt(0) != RFC4566.TYPE_MEDIA) {
@@ -113,6 +112,8 @@ public class SdpParser {
                 }
             }
         }
+        sessionDescription.setAttributes(sessionAttributes);
+
         if (line == null) {
             return null;
         }
@@ -134,7 +135,6 @@ public class SdpParser {
         while ((line = reader.readLine()) != null);
 
         ArrayList<MediaDescription> mediaDescriptions = new ArrayList<MediaDescription>();
-        sessionDescription.setMediaDescriptions(mediaDescriptions);
 
         for (SdpLine sdpLine : mediaLines) {
             MediaDescription mediaDescription;

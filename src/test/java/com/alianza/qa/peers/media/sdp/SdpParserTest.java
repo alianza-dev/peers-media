@@ -26,7 +26,7 @@ import java.net.InetAddress;
 import java.util.Hashtable;
 import java.util.List;
 
-public class SdpParserTestNG {
+public class SdpParserTest {
 
     @Test
     public void testParse() throws IOException {
