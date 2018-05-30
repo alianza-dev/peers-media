@@ -10,11 +10,11 @@
 
     <groupId>com.alianza.qa</groupId>
     <artifactId>peers-media</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
 
     <scm>
         <developerConnection>scm:git:ssh://git@github.com/alianza-dev/peers-media.git</developerConnection>
-      <tag>v1.0.0</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <dependencies>
