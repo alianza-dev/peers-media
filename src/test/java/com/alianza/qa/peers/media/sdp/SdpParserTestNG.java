@@ -13,13 +13,13 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    Copyright 2007, 2008, 2009, 2010 Yohann Martineau 
+
+    Copyright 2007, 2008, 2009, 2010 Yohann Martineau
 */
 
 package com.alianza.qa.peers.media.sdp;
 
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.net.InetAddress;

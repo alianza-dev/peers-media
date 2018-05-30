@@ -13,11 +13,13 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    Copyright 2010 Yohann Martineau 
+
+    Copyright 2010 Yohann Martineau
 */
 
 package com.alianza.qa.peers.media.rtp;
+
+import java.util.Arrays;
 
 public class RtpPacket {
 
@@ -107,19 +109,19 @@ public class RtpPacket {
     }
 
     public long[] getCsrcList() {
-        return csrcList;
+        return Arrays.copyOf(csrcList, csrcList.length);
     }
 
     public void setCsrcList(long[] csrcList) {
-        this.csrcList = csrcList;
+        this.csrcList = Arrays.copyOf(csrcList, csrcList.length);
     }
 
     public byte[] getData() {
-        return data;
+        return Arrays.copyOf(data, data.length);
     }
 
     public void setData(byte[] data) {
-        this.data = data;
+        this.data = Arrays.copyOf(data, data.length);
     }
 
     public boolean isIncrementTimeStamp() {

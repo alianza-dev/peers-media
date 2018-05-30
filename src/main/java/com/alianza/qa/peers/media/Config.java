@@ -13,14 +13,14 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    Copyright 2010 Yohann Martineau 
+
+    Copyright 2010 Yohann Martineau
 */
 
 package com.alianza.qa.peers.media;
 
-import net.sourceforge.peers.media.AbstractSoundManager;
-import net.sourceforge.peers.media.MediaMode;
+import com.alianza.qa.peers.media.media.AbstractSoundManager;
+import com.alianza.qa.peers.media.media.MediaMode;
 
 import java.net.InetAddress;
 

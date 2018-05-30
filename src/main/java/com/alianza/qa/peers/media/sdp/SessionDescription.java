@@ -13,8 +13,8 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    Copyright 2007, 2008, 2009, 2010 Yohann Martineau 
+
+    Copyright 2007, 2008, 2009, 2010 Yohann Martineau
 */
 
 package com.alianza.qa.peers.media.sdp;
@@ -22,8 +22,10 @@ package com.alianza.qa.peers.media.sdp;
 import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.InetAddress;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map.Entry;
 
 public class SessionDescription {
 
@@ -52,11 +54,11 @@ public class SessionDescription {
     }
 
     public List<MediaDescription> getMediaDescriptions() {
-        return mediaDescriptions;
+        return new ArrayList<>(mediaDescriptions);
     }
 
     public void setMediaDescriptions(List<MediaDescription> mediaDescriptions) {
-        this.mediaDescriptions = mediaDescriptions;
+        this.mediaDescriptions = new ArrayList<>(mediaDescriptions);
     }
 
     public String getName() {
@@ -84,11 +86,11 @@ public class SessionDescription {
     }
 
     public Hashtable<String, String> getAttributes() {
-        return attributes;
+        return new Hashtable<>(attributes);
     }
 
     public void setAttributes(Hashtable<String, String> attributes) {
-        this.attributes = attributes;
+        this.attributes = new Hashtable<>(attributes);
     }
 
     @Override
@@ -112,12 +114,11 @@ public class SessionDescription {
         buf.append("c=IN IP").append(ipVersion).append(" ");
         buf.append(hostAddress).append("\r\n");
         buf.append("t=0 0\r\n");
-        for (String attributeName : attributes.keySet()) {
-            String attributeValue = attributes.get(attributeName);
-            buf.append("a=").append(attributeName);
-            if (attributeValue != null && !"".equals(attributeValue.trim())) {
+        for (Entry<String, String> attribute : attributes.entrySet()) {
+            buf.append("a=").append(attribute.getKey());
+            if (attribute.getValue() != null && !"".equals(attribute.getValue().trim())) {
                 buf.append(":");
-                buf.append(attributeValue);
+                buf.append(attribute.getValue());
                 buf.append("\r\n");
             }
         }

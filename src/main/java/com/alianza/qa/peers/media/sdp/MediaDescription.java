@@ -13,8 +13,8 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    Copyright 2007, 2008, 2009, 2010 Yohann Martineau 
+
+    Copyright 2007, 2008, 2009, 2010 Yohann Martineau
  */
 
 package com.alianza.qa.peers.media.sdp;
@@ -24,6 +24,7 @@ import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map.Entry;
 
 public class MediaDescription {
 
@@ -43,11 +44,11 @@ public class MediaDescription {
     }
 
     public Hashtable<String, String> getAttributes() {
-        return attributes;
+        return new Hashtable<>(attributes);
     }
 
     public void setAttributes(Hashtable<String, String> attributes) {
-        this.attributes = attributes;
+        this.attributes = new Hashtable<>(attributes);
     }
 
     public InetAddress getIpAddress() {
@@ -102,12 +103,11 @@ public class MediaDescription {
             buf.append(codec.toString());
         }
         if (attributes != null) {
-            for (String attributeName : attributes.keySet()) {
+            for (Entry<String, String> entry : attributes.entrySet()) {
                 buf.append(RFC4566.TYPE_ATTRIBUTE).append(RFC4566.SEPARATOR);
-                buf.append(attributeName);
-                String attributeValue = attributes.get(attributeName);
-                if (attributeValue != null && !"".equals(attributeValue.trim())) {
-                    buf.append(":").append(attributeValue);
+                buf.append(entry.getKey());
+                if (entry.getValue() != null && !"".equals(entry.getValue().trim())) {
+                    buf.append(":").append(entry.getValue());
                 }
                 buf.append("\r\n");
             }

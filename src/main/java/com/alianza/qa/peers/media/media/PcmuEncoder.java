@@ -13,8 +13,8 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    Copyright 2010, 2011 Oleg Kulikov, Yohann Martineau 
+
+    Copyright 2010, 2011 Oleg Kulikov, Yohann Martineau
 */
 
 package com.alianza.qa.peers.media.media;
@@ -25,8 +25,8 @@ import java.util.concurrent.CountDownLatch;
 
 public class PcmuEncoder extends Encoder {
 
-    private final static int cBias = 0x84;
-    private final static short seg_end[] = new short[]{0xFF, 0x1FF, 0x3FF, 0x7FF,
+    private static final int cBias = 0x84;
+    private static final short seg_end[] = new short[]{0xFF, 0x1FF, 0x3FF, 0x7FF,
             0xFFF, 0x1FFF, 0x3FFF, 0x7FFF
     };
 

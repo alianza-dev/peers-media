@@ -13,7 +13,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
+
     Copyright 2010, 2011 Oleg Kulikov, Yohann Martineau
 */
 
@@ -25,7 +25,7 @@ import java.util.concurrent.CountDownLatch;
 
 public class PcmaEncoder extends Encoder {
 
-    private final static int cClip = 32635;
+    private static final int cClip = 32635;
     private static byte aLawCompressTable[] = new byte[]{
             1, 1, 2, 2, 3, 3, 3, 3,
             4, 4, 4, 4, 4, 4, 4, 4,

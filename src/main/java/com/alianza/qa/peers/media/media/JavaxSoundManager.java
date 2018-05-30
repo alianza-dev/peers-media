@@ -10,13 +10,15 @@
     GNU General Public License for more details.
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    Copyright 2010, 2011, 2012 Yohann Martineau 
+
+    Copyright 2010, 2011, 2012 Yohann Martineau
 */
 
 package com.alianza.qa.peers.media.media;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.NonNull;
+import lombok.Synchronized;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.sound.sampled.AudioFormat;
@@ -120,7 +122,8 @@ public class JavaxSoundManager extends AbstractSoundManager {
     }
 
     @Override
-    public synchronized void close() {
+    @Synchronized
+    public void close() {
         logger.debug("closeLines");
         if (microphoneOutput != null) {
             try {
@@ -161,7 +164,9 @@ public class JavaxSoundManager extends AbstractSoundManager {
     }
 
     @Override
-    public synchronized byte[] readData() {
+    @Synchronized
+    @SuppressFBWarnings("SWL_SLEEP_WITH_LOCK_HELD")
+    public byte[] readData() {
         if (targetDataLine == null) {
             return null;
         }

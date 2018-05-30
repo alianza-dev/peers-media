@@ -13,7 +13,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
+
     Copyright 2012 Yohann Martineau
 */
 
@@ -26,6 +26,6 @@ public interface SoundSource {
      *
      * @return
      */
-    public byte[] readData();
+    byte[] readData();
 
 }

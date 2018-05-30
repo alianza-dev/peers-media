@@ -13,8 +13,8 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    Copyright 2009, 2010, 2012 Yohann Martineau 
+
+    Copyright 2009, 2010, 2012 Yohann Martineau
 */
 
 package com.alianza.qa.peers.media.media;
@@ -27,6 +27,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Slf4j
 public class Echo implements Runnable {
@@ -36,7 +37,7 @@ public class Echo implements Runnable {
     private DatagramSocket datagramSocket;
     private InetAddress remoteAddress;
     private int remotePort;
-    private boolean isRunning;
+    private AtomicBoolean isRunning;
 
     public Echo(DatagramSocket datagramSocket,
                 String remoteAddress, int remotePort)
@@ -44,13 +45,13 @@ public class Echo implements Runnable {
         this.datagramSocket = datagramSocket;
         this.remoteAddress = InetAddress.getByName(remoteAddress);
         this.remotePort = remotePort;
-        isRunning = true;
+        isRunning = new AtomicBoolean();
     }
 
     @Override
     public void run() {
         try {
-            while (isRunning) {
+            while (isRunning.get()) {
                 byte[] buf = new byte[BUFFER_SIZE];
                 DatagramPacket datagramPacket = new DatagramPacket(buf,
                                                                    buf.length);
@@ -72,7 +73,7 @@ public class Echo implements Runnable {
 
     }
 
-    public synchronized void stop() {
-        isRunning = false;
+    public void stop() {
+        isRunning.set(false);
     }
 }

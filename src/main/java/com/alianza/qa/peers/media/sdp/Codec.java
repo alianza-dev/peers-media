@@ -13,14 +13,16 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    Copyright 2010 Yohann Martineau 
+
+    Copyright 2010 Yohann Martineau
 */
 
 package com.alianza.qa.peers.media.sdp;
 
-import net.sourceforge.peers.media.MediaManager;
+import com.alianza.qa.peers.media.media.MediaManager;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(of = "name")
 public class Codec {
 
     private int payloadType;
@@ -40,18 +42,6 @@ public class Codec {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Codec)) {
-            return false;
-        }
-        Codec codec = (Codec) obj;
-        if (codec.getName() == null) {
-            return name == null;
-        }
-        return codec.getName().equalsIgnoreCase(name);
     }
 
     @Override

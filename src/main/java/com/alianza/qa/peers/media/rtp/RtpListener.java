@@ -13,14 +13,14 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    Copyright 2010 Yohann Martineau 
+
+    Copyright 2010 Yohann Martineau
 */
 
 package com.alianza.qa.peers.media.rtp;
 
 public interface RtpListener {
 
-    public void receivedRtpPacket(RtpPacket rtpPacket);
+    void receivedRtpPacket(RtpPacket rtpPacket);
 
 }

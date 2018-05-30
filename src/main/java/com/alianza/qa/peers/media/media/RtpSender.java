@@ -13,8 +13,8 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    Copyright 2008, 2009, 2010, 2011 Yohann Martineau 
+
+    Copyright 2008, 2009, 2010, 2011 Yohann Martineau
 */
 
 package com.alianza.qa.peers.media.media;
@@ -23,9 +23,6 @@ import com.alianza.qa.peers.media.rtp.RtpPacket;
 import com.alianza.qa.peers.media.rtp.RtpSession;
 import com.alianza.qa.peers.media.sdp.Codec;
 import lombok.extern.slf4j.Slf4j;
-import net.sourceforge.peers.rtp.RtpPacket;
-import net.sourceforge.peers.rtp.RtpSession;
-import net.sourceforge.peers.sdp.Codec;
 
 import java.io.File;
 import java.io.FileNotFoundException;

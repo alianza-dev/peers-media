@@ -13,14 +13,14 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    Copyright 2013 Yohann Martineau 
+
+    Copyright 2013 Yohann Martineau
 */
 package com.alianza.qa.peers.media.media;
 
 public abstract class AbstractSoundManager implements SoundSource {
 
-    public final static String MEDIA_DIR = "media";
+    public static final String MEDIA_DIR = "media";
 
     public abstract void init();
 

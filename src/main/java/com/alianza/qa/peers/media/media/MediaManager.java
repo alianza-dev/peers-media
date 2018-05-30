@@ -13,8 +13,8 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    Copyright 2010-2013 Yohann Martineau 
+
+    Copyright 2010-2013 Yohann Martineau
 */
 
 package com.alianza.qa.peers.media.media;
@@ -24,10 +24,6 @@ import com.alianza.qa.peers.media.rtp.RtpPacket;
 import com.alianza.qa.peers.media.rtp.RtpSession;
 import com.alianza.qa.peers.media.sdp.Codec;
 import lombok.extern.slf4j.Slf4j;
-import net.sourceforge.peers.Config;
-import net.sourceforge.peers.rtp.RtpPacket;
-import net.sourceforge.peers.rtp.RtpSession;
-import net.sourceforge.peers.sdp.Codec;
 
 import java.io.IOException;
 import java.net.DatagramSocket;
@@ -181,7 +177,7 @@ public class MediaManager {
 
     public void handleAck(String destAddress, int destPort, Codec codec) {
         switch (config.getMediaMode()) {
-            case MediaMode.captureAndPlayback:
+            case captureAndPlayback:
 
                 AbstractSoundManager soundManager = config.getSoundManager();
                 soundManager.init();
@@ -200,7 +196,7 @@ public class MediaManager {
                 incomingRtpReader.start();
 
                 break;
-            case MediaMode.echo:
+            case echo:
                 Echo echo;
                 try {
                     echo = new Echo(datagramSocket, destAddress, destPort);
@@ -214,7 +210,7 @@ public class MediaManager {
                 Thread echoThread = new Thread(echo, Echo.class.getSimpleName());
                 echoThread.start();
                 break;
-            case MediaMode.file:
+            case file:
                 if (fileReader != null) {
                     fileReader.close();
                 }
@@ -230,7 +226,7 @@ public class MediaManager {
                 }
                 incomingRtpReader.start();
                 break;
-            case MediaMode.none:
+            case none:
             default:
                 break;
         }
@@ -238,7 +234,7 @@ public class MediaManager {
 
     public void updateRemote(String destAddress, int destPort, Codec codec) {
         switch (config.getMediaMode()) {
-            case MediaMode.captureAndPlayback:
+            case captureAndPlayback:
                 try {
                     InetAddress inetAddress = InetAddress.getByName(destAddress);
                     rtpSession.setRemoteAddress(inetAddress);
@@ -247,10 +243,10 @@ public class MediaManager {
                 }
                 rtpSession.setRemotePort(destPort);
                 break;
-            case MediaMode.echo:
+            case echo:
                 //TODO update echo socket
                 break;
-            case MediaMode.file:
+            case file:
                 try {
                     InetAddress inetAddress = InetAddress.getByName(destAddress);
                     rtpSession.setRemoteAddress(inetAddress);
@@ -298,20 +294,20 @@ public class MediaManager {
         }
 
         switch (config.getMediaMode()) {
-            case MediaMode.captureAndPlayback:
+            case captureAndPlayback:
                 AbstractSoundManager soundManager = config.getSoundManager();
                 if (soundManager != null) {
                     soundManager.close();
                 }
                 break;
-            case MediaMode.echo:
+            case echo:
 //            Echo echo = userAgent.getEcho();
 //            if (echo != null) {
 //                echo.stop();
 //                userAgent.setEcho(null);
 //            }
                 break;
-            case MediaMode.file:
+            case file:
                 fileReader.close();
                 break;
             default:

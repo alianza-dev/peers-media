@@ -13,20 +13,20 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    Copyright 2007, 2008, 2009, 2010 Yohann Martineau 
+
+    Copyright 2007, 2008, 2009, 2010 Yohann Martineau
 */
 
 package com.alianza.qa.peers.media.sdp;
 
 import com.alianza.qa.peers.media.rtp.RFC3551;
-import net.sourceforge.peers.rtp.RFC3551;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -38,14 +38,14 @@ public class SdpParser {
             return null;
         }
         ByteArrayInputStream in = new ByteArrayInputStream(body);
-        InputStreamReader inputStreamReader = new InputStreamReader(in);
+        InputStreamReader inputStreamReader = new InputStreamReader(in, StandardCharsets.UTF_8);
         BufferedReader reader = new BufferedReader(inputStreamReader);
         SessionDescription sessionDescription = new SessionDescription();
 
         //version
 
         String line = reader.readLine();
-        if (line.length() < 3) {
+        if (line == null || line.length() < 3) {
             return null;
         }
         if (line.charAt(0) != RFC4566.TYPE_VERSION
@@ -57,7 +57,7 @@ public class SdpParser {
         //origin
 
         line = reader.readLine();
-        if (line.length() < 3) {
+        if (line == null || line.length() < 3) {
             return null;
         }
         if (line.charAt(0) != RFC4566.TYPE_ORIGIN
@@ -66,7 +66,7 @@ public class SdpParser {
         }
         line = line.substring(2);
         String[] originArr = line.split(" ");
-        if (originArr == null || originArr.length != 6) {
+        if (originArr.length != 6) {
             return null;
         }
         sessionDescription.setUsername(originArr[0]);
@@ -77,7 +77,7 @@ public class SdpParser {
         //name
 
         line = reader.readLine();
-        if (line.length() < 3) {
+        if (line == null || line.length() < 3) {
             return null;
         }
         if (line.charAt(0) != RFC4566.TYPE_SUBJECT
@@ -140,7 +140,7 @@ public class SdpParser {
             MediaDescription mediaDescription;
             if (sdpLine.getType() == RFC4566.TYPE_MEDIA) {
                 String[] mediaArr = sdpLine.getValue().split(" ");
-                if (mediaArr == null || mediaArr.length < 4) {
+                if (mediaArr.length < 4) {
                     return null;
                 }
                 mediaDescription = new MediaDescription();

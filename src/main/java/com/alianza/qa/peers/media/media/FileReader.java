@@ -1,6 +1,5 @@
 /*
     This file is part of Peers, a java SIP softphone.
-
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -13,8 +12,8 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    Copyright 2012 Yohann Martineau 
+
+    Copyright 2012 Yohann Martineau
 */
 package com.alianza.qa.peers.media.media;
 
@@ -46,7 +45,7 @@ import java.io.IOException;
 @Slf4j
 public class FileReader implements SoundSource {
 
-    public final static int BUFFER_SIZE = 256;
+    public static final int BUFFER_SIZE = 256;
 
     private FileInputStream fileInputStream;
 
@@ -77,7 +76,7 @@ public class FileReader implements SoundSource {
         byte buffer[] = new byte[BUFFER_SIZE];
         try {
             if (fileInputStream.read(buffer) >= 0) {
-                Thread.sleep(15);
+//                Thread.sleep(15);
                 return buffer;
             } else {
                 fileInputStream.close();
@@ -85,8 +84,6 @@ public class FileReader implements SoundSource {
             }
         } catch (IOException e) {
             logger.error("io exception", e);
-        } catch (InterruptedException e) {
-            logger.debug("file reader interrupted");
         }
         return null;
     }

@@ -13,14 +13,14 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
+
     Copyright 2010 Yohann Martineau
 */
 
 package com.alianza.qa.peers.media.media;
 
-import net.sourceforge.peers.rtp.RFC4733;
-import net.sourceforge.peers.rtp.RtpPacket;
+import com.alianza.qa.peers.media.rtp.RFC4733;
+import com.alianza.qa.peers.media.rtp.RtpPacket;
 
 import java.util.ArrayList;
 import java.util.List;

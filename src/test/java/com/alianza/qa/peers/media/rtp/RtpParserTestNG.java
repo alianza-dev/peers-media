@@ -13,14 +13,14 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    Copyright 2010 Yohann Martineau 
+
+    Copyright 2010 Yohann Martineau
 */
 
 package com.alianza.qa.peers.media.rtp;
 
 
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 public class RtpParserTestNG {
 
@@ -56,7 +56,7 @@ public class RtpParserTestNG {
         assert rtpPacket.getSsrc() == 1;
         assert rtpPacket.getData().length == 160;
         for (int i = 0; i < 160; ++i)
-            assert (int) (rtpPacket.getData()[i] & 0xff) == i;
+            assert (rtpPacket.getData()[i] & 0xff) == i;
     }
 
     @Test

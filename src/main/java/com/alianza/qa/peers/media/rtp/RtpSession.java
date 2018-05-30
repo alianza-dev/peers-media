@@ -13,14 +13,14 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    Copyright 2010-2013 Yohann Martineau 
+
+    Copyright 2010-2013 Yohann Martineau
 */
 
 package com.alianza.qa.peers.media.rtp;
 
+import com.alianza.qa.peers.media.media.AbstractSoundManager;
 import lombok.extern.slf4j.Slf4j;
-import net.sourceforge.peers.media.AbstractSoundManager;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -150,7 +150,7 @@ public class RtpSession {
         this.remotePort = remotePort;
     }
 
-    private void closeFileAndDatagramSocket() {
+    private synchronized void closeFileAndDatagramSocket() {
         if (mediaDebug) {
             try {
                 rtpSessionOutput.close();
@@ -242,7 +242,9 @@ public class RtpSession {
             System.arraycopy(data, offset, trimmedData, 0, length);
             if (mediaDebug) {
                 try {
-                    rtpSessionInput.write(trimmedData);
+                    synchronized (RtpSession.this) {
+                        rtpSessionInput.write(trimmedData);
+                    }
                 } catch (IOException e) {
                     logger.error("cannot write to file", e);
                     return;

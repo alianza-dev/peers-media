@@ -13,8 +13,8 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    Copyright 2008, 2009, 2010, 2011 Yohann Martineau 
+
+    Copyright 2008, 2009, 2010, 2011 Yohann Martineau
 */
 
 package com.alianza.qa.peers.media.media;
@@ -24,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.io.PipedOutputStream;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Slf4j
 public class Capture implements Runnable {
@@ -32,7 +33,7 @@ public class Capture implements Runnable {
     public static final int BUFFER_SIZE = SAMPLE_SIZE * 20;
 
     private PipedOutputStream rawData;
-    private boolean isStopped;
+    private AtomicBoolean isStopped;
     private SoundSource soundSource;
     private CountDownLatch latch;
 
@@ -41,13 +42,13 @@ public class Capture implements Runnable {
         this.rawData = rawData;
         this.soundSource = soundSource;
         this.latch = latch;
-        isStopped = false;
+        isStopped = new AtomicBoolean();
     }
 
     public void run() {
         byte[] buffer;
 
-        while (!isStopped) {
+        while (!isStopped.get()) {
             buffer = soundSource.readData();
             try {
                 if (buffer == null) {
@@ -70,8 +71,8 @@ public class Capture implements Runnable {
         }
     }
 
-    public synchronized void setStopped(boolean isStopped) {
-        this.isStopped = isStopped;
+    public void setStopped(boolean isStopped) {
+        this.isStopped.set(isStopped);
     }
 
 }
