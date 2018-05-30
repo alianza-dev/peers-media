@@ -1,6 +1,6 @@
 ---
 box:
-  id: $DOCKER_REPO/alpine-maven
+  id: $DOCKER_REPO/alz-java-build
   username: $DOCKER_REPO_USERNAME
   password: $DOCKER_REPO_PASSWORD
   tag: latest
